@@ -1,20 +1,49 @@
 <!-- interviewers/templates/interviewers/dashboard.html -->
 <h1>Interviewer Dashboard</h1>
+
+<!-- Form for Zoom credentials -->
+
+<!-- <form method="post">
+    {% csrf_token %}
+    {{ zoom_form.as_p }}
+    
+</form> -->
+
+<!-- List of resumes -->
+<h2>Candidate Resumes</h2>
 {% if resumes %}
 <ul>
   {% for resume in resumes %}
   <li>
-    {{ resume.user.username }}'s Resume: {% if resume.resume %}
-    <a href="/interviewer/media/resumes/{{ resume.resume.name|slice:'8:' }}">Download</a>
-
-
-
+    {{ resume.user.username }}'s Resume: 
+    {% if resume.resume %}
+      <a href="{{ resume.resume.url }}">Download</a>
+      <form method="post" style="display:inline;">
+        {% csrf_token %}
+        <input type="hidden" name="resume_id" value="{{ resume.id }}">
+        <button type="submit" name="generate_questions">Generate Questions</button>
+      </form>
+      <form method="post" style="display:inline;">
+        {% csrf_token %}
+        <input type="hidden" name="resume_id" value="{{ resume.id }}">
+        <input type="datetime-local" name="start_time" required>
+        <button type="submit" name="schedule_meeting">Schedule Meeting</button>
+      </form>
+      {% if resume.meeting_link %}
+        <p>Meeting Link: <a href="{{ resume.meeting_link }}">{{ resume.meeting_link }}</a></p>
+      {% endif %}
     {% else %}
-    <span>No resume uploaded</span>
+      <span>No resume uploaded</span>
     {% endif %}
   </li>
   {% endfor %}
 </ul>
 {% else %}
 <p>No resumes available.</p>
+{% endif %}
+
+<!-- Display generated questions -->
+{% if questions %}
+<h2>Generated Interview Questions</h2>
+<pre>{{ questions }}</pre>
 {% endif %}

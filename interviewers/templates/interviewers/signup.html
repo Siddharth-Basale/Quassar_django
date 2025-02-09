@@ -1,4 +1,3 @@
-<!-- interviewers/templates/interviewers/signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
-    </form>
+    </form>    
     <p>Already have an account? <a href="{% url 'interviewer_login' %}">Login here</a>.</p>
 </body>
 </html>

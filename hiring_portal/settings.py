@@ -135,4 +135,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-# hiring_portal/settings.py
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")

@@ -10,3 +10,10 @@
 {% else %}
     <p>No resume uploaded yet.</p>
 {% endif %}
+
+{% if candidate_profile.meeting_link %}
+    <h2>Your Scheduled Interview</h2>
+    <p>Meeting Link: <a href="{{ candidate_profile.meeting_link }}" target="_blank">{{ candidate_profile.meeting_link }}</a></p>
+{% else %}
+    <p>No interview scheduled yet.</p>
+{% endif %}
