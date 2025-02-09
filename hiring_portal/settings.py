@@ -132,4 +132,7 @@ RESUME_ROOT = os.path.join(BASE_DIR, 'resumes')  # Path to resumes folder
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-LOGIN_REDIRECT_URL = '/interviewer/dashboard/'
+
+
+
+# hiring_portal/settings.py

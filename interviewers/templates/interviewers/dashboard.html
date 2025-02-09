@@ -5,7 +5,7 @@
   {% for resume in resumes %}
   <li>
     {{ resume.user.username }}'s Resume: {% if resume.resume %}
-    <a href="/interviewer/resumes/{{ resume.resume.name|slice:'8:' }}">Download</a>
+    <a href="/interviewer/media/resumes/{{ resume.resume.name|slice:'8:' }}">Download</a>
 
 
 
