@@ -1,0 +1,20 @@
+<!-- interviewers/templates/interviewers/dashboard.html -->
+<h1>Interviewer Dashboard</h1>
+{% if resumes %}
+<ul>
+  {% for resume in resumes %}
+  <li>
+    {{ resume.user.username }}'s Resume: {% if resume.resume %}
+    <a href="/interviewer/resumes/{{ resume.resume.name|slice:'8:' }}">Download</a>
+
+
+
+    {% else %}
+    <span>No resume uploaded</span>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No resumes available.</p>
+{% endif %}
