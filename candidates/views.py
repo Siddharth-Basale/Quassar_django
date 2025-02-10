@@ -8,17 +8,23 @@ from django.urls import reverse_lazy
 
 @login_required
 def candidate_dashboard(request):
-    candidate_profile, created = CandidateProfile.objects.get_or_create(
-        user=request.user)
+    candidate_profile, created = CandidateProfile.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
-        form = ResumeUploadForm(
-            request.POST, request.FILES, instance=candidate_profile)
+        form = ResumeUploadForm(request.POST, request.FILES, instance=candidate_profile)
         if form.is_valid():
             form.save()
             return redirect('candidate_dashboard')
     else:
         form = ResumeUploadForm(instance=candidate_profile)
-    return render(request, 'candidates/dashboard.html', {'form': form, 'candidate_profile': candidate_profile})
+
+    return render(request, 'candidates/dashboard.html', {
+        'form': form,
+        'candidate_profile': candidate_profile,
+        'meeting_link': candidate_profile.meeting_link,
+        'meeting_time': candidate_profile.meeting_time
+    })
+
 
 
 class CandidateLoginView(LoginView):

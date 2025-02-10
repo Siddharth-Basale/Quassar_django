@@ -1,4 +1,5 @@
 <h1>Candidate Dashboard</h1>
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -11,9 +12,13 @@
     <p>No resume uploaded yet.</p>
 {% endif %}
 
-{% if candidate_profile.meeting_link %}
-    <h2>Your Scheduled Interview</h2>
-    <p>Meeting Link: <a href="{{ candidate_profile.meeting_link }}" target="_blank">{{ candidate_profile.meeting_link }}</a></p>
+<!-- ✅ Show Meeting Details -->
+{% if meeting_link %}
+    <h2>Upcoming Interview</h2>
+    <p><strong>Meeting Link:</strong> <a href="{{ meeting_link }}">{{ meeting_link }}</a></p>
+    {% if meeting_time %}
+        <p><strong>Scheduled Date & Time:</strong> {{ meeting_time }}</p>
+    {% endif %}
 {% else %}
-    <p>No interview scheduled yet.</p>
+    <p>No meeting scheduled yet.</p>
 {% endif %}
