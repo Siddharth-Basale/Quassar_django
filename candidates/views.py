@@ -4,6 +4,7 @@ from .forms import ResumeUploadForm, CandidateSignUpForm
 from .models import CandidateProfile
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
 
 
 @login_required
