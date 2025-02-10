@@ -177,7 +177,8 @@ def transcribe_audio(audio_file_path):
     llama_prompt = f"""
 You are an AI-powered interview evaluator assisting the interviewer in assessing a candidate's responses.  
 The following is an automatically transcribed interview transcript, with raw and unprocessed text.  
-Your task is to extract key insights, assess the quality of responses, and provide a structured evaluation based on the given criteria.  
+Your task is to extract key insights, assess the quality of responses, and provide a structured evaluation based on the given criteria.
+and also provide asked important question and candidate's answer. 
 
 **Interview Transcript (raw):**  
 {transcription}  
