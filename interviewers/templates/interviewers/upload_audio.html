@@ -1,0 +1,6 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Upload Interview Recording (M4A format):</label>
+    <input type="file" name="audio_file" accept=".m4a" required>
+    <button type="submit">Analyze Interview</button>
+</form>

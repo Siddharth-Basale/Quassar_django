@@ -1,13 +1,4 @@
-<!-- interviewers/templates/interviewers/dashboard.html -->
 <h1>Interviewer Dashboard</h1>
-
-<!-- Form for Zoom credentials -->
-
-<!-- <form method="post">
-    {% csrf_token %}
-    {{ zoom_form.as_p }}
-    
-</form> -->
 
 <!-- List of resumes -->
 <h2>Candidate Resumes</h2>
@@ -18,20 +9,49 @@
     {{ resume.user.username }}'s Resume: 
     {% if resume.resume %}
       <a href="{{ resume.resume.url }}">Download</a>
+
+      <!-- Generate Questions Button -->
       <form method="post" style="display:inline;">
         {% csrf_token %}
         <input type="hidden" name="resume_id" value="{{ resume.id }}">
         <button type="submit" name="generate_questions">Generate Questions</button>
       </form>
+
+      <!-- Schedule Meeting -->
       <form method="post" style="display:inline;">
         {% csrf_token %}
         <input type="hidden" name="resume_id" value="{{ resume.id }}">
         <input type="datetime-local" name="start_time" required>
         <button type="submit" name="schedule_meeting">Schedule Meeting</button>
       </form>
+      
+      <!-- Show Upload & Analyze button only if meeting is scheduled -->
       {% if resume.meeting_link %}
         <p>Meeting Link: <a href="{{ resume.meeting_link }}">{{ resume.meeting_link }}</a></p>
+        <form method="post" enctype="multipart/form-data" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="resume_id" value="{{ resume.id }}">
+          <input type="file" name="audio_file" accept=".m4a" required>
+          <button type="submit" name="process_audio">Upload & Analyze Interview</button>
+        </form>
       {% endif %}
+      
+      <!-- Show Interview Analysis only for this candidate -->
+      {% if evaluation_reports %}
+        {% for report_id, report in evaluation_reports.items %}
+          {% if resume.id|stringformat:"s" == report_id %}
+            <h3>Interview Analysis</h3>
+            <pre>{{ report }}</pre>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <!-- Show Generated Interview Questions only if available -->
+      {% if questions %}
+        <h2>Generated Interview Questions</h2>
+        <pre>{{ questions }}</pre>
+      {% endif %}
+      
     {% else %}
       <span>No resume uploaded</span>
     {% endif %}
@@ -40,10 +60,4 @@
 </ul>
 {% else %}
 <p>No resumes available.</p>
-{% endif %}
-
-<!-- Display generated questions -->
-{% if questions %}
-<h2>Generated Interview Questions</h2>
-<pre>{{ questions }}</pre>
 {% endif %}
