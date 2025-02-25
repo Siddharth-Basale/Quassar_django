@@ -190,7 +190,7 @@ and also provide asked important question and candidate's answer.
 4. **Overall Impression:** Provide a qualitative summary of the candidate’s performance, supported by specific examples from their responses.  
 5. **Key Observations:** Highlight any notable strengths or weaknesses, explaining why they stood out.  
 
-Please format your response in a detailed manner. Also, this is interviewer-tailored, so do not provide recommendations for the interviewer.  
+Please format your response in a detailed manner. Also, this is interviewer-tailored, so do not provide recommendations for the candidate.  
 
 """
 
